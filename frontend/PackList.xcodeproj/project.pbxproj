@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A043EA2D2AB2360300E6388C /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043EA2C2AB2360300E6388C /* APIHandler.swift */; };
 		A054EB6D2AAFB5F900ED97BE /* PackListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054EB6C2AAFB5F900ED97BE /* PackListApp.swift */; };
 		A054EB6F2AAFB5F900ED97BE /* PackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054EB6E2AAFB5F900ED97BE /* PackView.swift */; };
 		A054EB712AAFB5FE00ED97BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A054EB702AAFB5FE00ED97BE /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A043EA2C2AB2360300E6388C /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
 		A054EB692AAFB5F900ED97BE /* PackList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PackList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A054EB6C2AAFB5F900ED97BE /* PackListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackListApp.swift; sourceTree = "<group>"; };
 		A054EB6E2AAFB5F900ED97BE /* PackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				A054EB7A2AAFC7ED00ED97BE /* HomeView.swift */,
 				A054EB6E2AAFB5F900ED97BE /* PackView.swift */,
 				A075E3CD2AAFECE400EAF657 /* OpenAIService.swift */,
+				A043EA2C2AB2360300E6388C /* APIHandler.swift */,
 				A075E3D02AAFF2E000EAF657 /* MapsDemo.swift */,
 				A054EB702AAFB5FE00ED97BE /* Assets.xcassets */,
 				A054EB722AAFB5FE00ED97BE /* Preview Content */,
@@ -151,6 +154,7 @@
 				A054EB7B2AAFC7ED00ED97BE /* HomeView.swift in Sources */,
 				A054EB6F2AAFB5F900ED97BE /* PackView.swift in Sources */,
 				A075E3D12AAFF2E000EAF657 /* MapsDemo.swift in Sources */,
+				A043EA2D2AB2360300E6388C /* APIHandler.swift in Sources */,
 				A054EB6D2AAFB5F900ED97BE /* PackListApp.swift in Sources */,
 				A075E3CE2AAFECE400EAF657 /* OpenAIService.swift in Sources */,
 			);

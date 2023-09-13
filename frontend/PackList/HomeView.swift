@@ -9,6 +9,7 @@ import SwiftUI
 
 let savedtrips = ["Vacation in Cancun", "Hiking in Arizona", "Surfing in San Diego"]
 let samplePreviewText = ["Vacation in Cancun","Camping in the Olympic Forest", "Climbing Yosemite", "Backpacking the Pacific Trail"]
+
 let clothingItems: [String: Int] = [
        "T-shirt": 200,
        "Jeans": 500,
@@ -37,7 +38,7 @@ let clothingItems: [String: Int] = [
 
 struct HomeView: View {
     
-    @State private var textInput : String = ""
+    @State private var text : String = ""
     @State private var previewText: String = samplePreviewText.randomElement()!
     @State private var isShowingDetailView: Bool = false
     
@@ -73,7 +74,7 @@ struct HomeView: View {
         VStack {
             Spacer()
             HStack {
-                TextField(previewText, text: $textInput)
+                TextField(previewText, text: $text)
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
                     .task {
@@ -93,8 +94,8 @@ struct HomeView: View {
                 
                 Button {
                     Task {
-                        textInput = ""
-//                        await submitQuery()
+                        text = ""
+                        await submitQuery(input: text)
                         isShowingDetailView = true
                     }
                 } label: {
@@ -111,12 +112,11 @@ struct HomeView: View {
         .padding()
     }
     
-    private func submitQuery() async -> Void {
-        let preamble = "Take on the perspective of someone going on a trip. Extract the activity and place from this query, and reccommend a list of items to pack. Items should fit inside a suitcase and carry-on. Take into account the historical weather for this location around the time of year when most people would visit. Site the temperature in fahrenheit. Only respond with the list, and weight of each item in grams."
-        
-        _ = openAIService.query(prompt: "\(preamble)")
+    private func submitQuery(input: String) async -> Void {
+        let query = "Extract the activity, location, and month from the following text and return it format as json in response. Text: \(input)"
+        let response = openAIService.query(prompt: "\(query)")
+        print(response)
     }
-    
 }
 
 #Preview("HomeView") {
