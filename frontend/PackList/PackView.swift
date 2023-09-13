@@ -80,7 +80,7 @@ struct PackView: View {
             VStack {
                 ZStack {
                     Circle()
-                        .fill(Color.orange)
+                        .fill(Color(hex:"#FE6B72"))
                 }
             }
             .frame(width: 20, height: 20)

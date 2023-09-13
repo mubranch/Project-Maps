@@ -55,6 +55,7 @@ struct HomeView: View {
             ZStack {
                 VStack {
                     logo
+                    
                     if !isShowingChat {
                         prompt1
                         datePicker
@@ -64,15 +65,16 @@ struct HomeView: View {
 
                 }
                 .frame(maxHeight: .infinity)
+                
                 if isShowingChat {
                     search
                 }
             }
             .frame(maxWidth: .infinity)
-            .background(Color(hex: "#ffffff"))
+            .background(.white)
             .toolbar {
                 if isShowingChat {
-                    Button("Edit Trip Dates") {
+                    Button("Edit Dates") {
                         withAnimation {
                             isShowingChat.toggle()
                         }
@@ -84,18 +86,31 @@ struct HomeView: View {
     }
     
     var logo: some View {
-        ZStack {
-            Image(systemName: "globe.europe.africa.fill")
-                .font(.system(size: 180))
-                .fontWeight(.ultraLight)
-                .padding()
-                .blur(radius: 0.2)
-            
-            Image(systemName: "airplane")
-                .font(.system(size: 100))
-                .foregroundStyle(.blue)
-                .padding()
+        GeometryReader { proxy in
+            ZStack {
+                Color(hex:"#FE6B72")
+                Image("globe")
+                    .position(CGPoint(x:proxy.size.width/2, y:proxy.size.height*0.7))
+                    .font(.system(size: proxy.size.width))
+                    .fontWeight(.ultraLight)
+                    .border(.red)
+                    .shadow(radius: 5)
+                    
+                Image(systemName: "airplane")
+                    .position(CGPoint(x:proxy.size.width*0.6, y:proxy.size.height*0.45))
+                    .font(.system(size: proxy.size.width*0.5))
+                    .foregroundStyle(.white)
+                    .rotationEffect(.degrees(-40))
+                    .shadow(radius: 3)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .clipShape(.circle)
+            .overlay {
+                Circle()
+                    .strokeBorder(.black, style: .init(lineWidth: 4))
+            }
         }
+        .frame(maxWidth: 200, maxHeight: 200)
     }
     
     var datePicker: some View {
@@ -119,7 +134,9 @@ struct HomeView: View {
                     Image(systemName: "arrow.right")
                         .bold()
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(.bordered)
+                .background(Color(hex:"#FE6B72"))
+                .foregroundStyle(.white)
                 .clipShape(Circle())
                 .padding(.vertical, 4)
             }
@@ -148,6 +165,7 @@ struct HomeView: View {
     var search: some View {
         VStack {
             Spacer()
+            Divider()
             HStack {
                 HStack {
                     TextField("Tell us your secrets...", text: $text)
@@ -158,28 +176,25 @@ struct HomeView: View {
                     Button {
                         Task {
                             text = ""
-//                            await submitQuery(input: text)
+                            //                            await submitQuery(input: text)
                             isShowingDetailView = true
                         }
                     } label: {
                         Image(systemName: "arrow.up")
                             .bold()
                     }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.bordered)
+                    .background(text == "" ? Color(uiColor: .systemGray) : Color(hex:"#FE6B72"))
+                    .foregroundStyle(.white)
                     .clipShape(Circle())
                     .navigationDestination(isPresented: $isShowingDetailView, destination: {
                         PackView(items: clothingItems)
                     })
-                    .padding(.vertical, 4)
-                }
-                .background {
-                    RoundedRectangle(cornerRadius: .infinity)
-                        .fill(.white)
+                    .disabled(text == "")
                 }
             }
-                
+            .padding()
         }
-        .padding()
 
     }
     
