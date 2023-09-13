@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0101F362AB23D430082E7AF /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0101F352AB23D430082E7AF /* Color+Ext.swift */; };
 		A043EA2D2AB2360300E6388C /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043EA2C2AB2360300E6388C /* APIHandler.swift */; };
 		A054EB6D2AAFB5F900ED97BE /* PackListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054EB6C2AAFB5F900ED97BE /* PackListApp.swift */; };
 		A054EB6F2AAFB5F900ED97BE /* PackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054EB6E2AAFB5F900ED97BE /* PackView.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A0101F352AB23D430082E7AF /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
 		A043EA2C2AB2360300E6388C /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
 		A054EB692AAFB5F900ED97BE /* PackList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PackList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A054EB6C2AAFB5F900ED97BE /* PackListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackListApp.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				A075E3CD2AAFECE400EAF657 /* OpenAIService.swift */,
 				A043EA2C2AB2360300E6388C /* APIHandler.swift */,
 				A075E3D02AAFF2E000EAF657 /* MapsDemo.swift */,
+				A0101F352AB23D430082E7AF /* Color+Ext.swift */,
 				A054EB702AAFB5FE00ED97BE /* Assets.xcassets */,
 				A054EB722AAFB5FE00ED97BE /* Preview Content */,
 			);
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A054EB7B2AAFC7ED00ED97BE /* HomeView.swift in Sources */,
+				A0101F362AB23D430082E7AF /* Color+Ext.swift in Sources */,
 				A054EB6F2AAFB5F900ED97BE /* PackView.swift in Sources */,
 				A075E3D12AAFF2E000EAF657 /* MapsDemo.swift in Sources */,
 				A043EA2D2AB2360300E6388C /* APIHandler.swift in Sources */,

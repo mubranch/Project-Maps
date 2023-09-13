@@ -41,78 +41,152 @@ struct HomeView: View {
     @State private var text : String = ""
     @State private var previewText: String = samplePreviewText.randomElement()!
     @State private var isShowingDetailView: Bool = false
+    @State private var isShowingChat: Bool = false
     
-    private let openAIService = OpenAIService(apiKey: "")
+    private let apiHandler = APIHandler()
+    private let openAIService = OpenAIService()
+    
+    @State private var startDate: Date = Date()
+    @State private var endDate: Date = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 60*60*24)
+    
     
     var body: some View {
         NavigationStack {
             ZStack {
-                splash
-                searchBar
+                VStack {
+                    logo
+                    if !isShowingChat {
+                        prompt1
+                        datePicker
+                    } else {
+                        prompt2
+                    }
+
+                }
+                .frame(maxHeight: .infinity)
+                if isShowingChat {
+                    search
+                }
             }
             .frame(maxWidth: .infinity)
+            .background(Color(hex: "#ffffff"))
+            .toolbar {
+                if isShowingChat {
+                    Button("Edit Trip Dates") {
+                        withAnimation {
+                            isShowingChat.toggle()
+                        }
+                    }
+                }
+            }
         }
         .ignoresSafeArea(edges: [.top, .bottom])
     }
     
-    var splash: some View {
-        VStack(alignment: .leading, spacing: 16) {
+    var logo: some View {
+        ZStack {
+            Image(systemName: "globe.europe.africa.fill")
+                .font(.system(size: 180))
+                .fontWeight(.ultraLight)
+                .padding()
+                .blur(radius: 0.2)
             
-            Image(systemName: "tshirt.fill")
-                .font(.system(size: 72))
-            
-            Text("Tell me where you're going, and what you're going to do there.")
-                .font(.title2)
-                .minimumScaleFactor(0.6)
-                .lineLimit(3)
-            
+            Image(systemName: "airplane")
+                .font(.system(size: 100))
+                .foregroundStyle(.blue)
+                .padding()
         }
-        .padding()
     }
     
-    var searchBar: some View {
-        VStack {
-            Spacer()
-            HStack {
-                TextField(previewText, text: $text)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-                    .task {
-                        // Start a timer to update previewText every 3 seconds
-                        Timer.scheduledTimer(withTimeInterval: 7.0, repeats: true) { _ in
-                            withAnimation {
-                                previewText = samplePreviewText.randomElement()!
-                            }
-                        }
-                    }
-                    .padding(.leading)
-                    .background {
-                        RoundedRectangle(cornerRadius: .infinity)
-                            .stroke(.tertiary, style: .init())
-                            .frame(minHeight: 32)
-                    }
-                
+    var datePicker: some View {
+        HStack {
+            DatePicker("Start Date", selection: $startDate, in: Date()..., displayedComponents: .date)
+                .datePickerStyle(.compact)
+                .labelsHidden()
+                .disabled(isShowingChat)
+            
+            DatePicker("End Date", selection: $endDate, in: startDate..., displayedComponents: .date)
+                .datePickerStyle(.compact)
+                .labelsHidden()
+                .disabled(isShowingChat)
+            
+            if !isShowingChat {
                 Button {
-                    Task {
-                        text = ""
-                        await submitQuery(input: text)
-                        isShowingDetailView = true
+                    withAnimation {
+                        isShowingChat.toggle()
                     }
                 } label: {
-                    Image(systemName: "arrow.up")
+                    Image(systemName: "arrow.right")
                         .bold()
                 }
                 .buttonStyle(.borderedProminent)
                 .clipShape(Circle())
-                .navigationDestination(isPresented: $isShowingDetailView, destination: {
-                    PackView(items: clothingItems)
-                })
+                .padding(.vertical, 4)
             }
         }
         .padding()
     }
     
+    var prompt1: some View {
+        Text("When are you travelling?")
+            .font(.title2)
+            .minimumScaleFactor(0.6)
+            .lineLimit(2)
+            .multilineTextAlignment(.center)
+            .padding()
+    }
+    
+    var prompt2: some View {
+        Text("Where are you going and what will you be doing there?")
+            .font(.title2)
+            .minimumScaleFactor(0.6)
+            .lineLimit(2)
+            .multilineTextAlignment(.center)
+            .padding()
+    }
+    
+    var search: some View {
+        VStack {
+            Spacer()
+            HStack {
+                HStack {
+                    TextField("Tell us your secrets...", text: $text)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .padding(.leading)
+                    
+                    Button {
+                        Task {
+                            text = ""
+//                            await submitQuery(input: text)
+                            isShowingDetailView = true
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up")
+                            .bold()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .clipShape(Circle())
+                    .navigationDestination(isPresented: $isShowingDetailView, destination: {
+                        PackView(items: clothingItems)
+                    })
+                    .padding(.vertical, 4)
+                }
+                .background {
+                    RoundedRectangle(cornerRadius: .infinity)
+                        .fill(.white)
+                }
+            }
+                
+        }
+        .padding()
+
+    }
+    
     private func submitQuery(input: String) async -> Void {
+        // Set key before submitting query - fix later
+        openAIService.setKey(key: apiHandler.openAIKey)
+        
         let query = "Extract the activity, location, and month from the following text and return it format as json in response. Text: \(input)"
         let response = openAIService.query(prompt: "\(query)")
         print(response)

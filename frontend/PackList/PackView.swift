@@ -16,12 +16,17 @@ struct PackView: View {
     var body: some View {
         if let items = items {
             VStack {
-                HStack {
+                VStack(spacing: 24) {
                     Image(systemName: "suitcase.rolling.fill")
+                        .font(.system(size: 96))
                     Text(getSuitcaseWeight().formatted())
+                        .font(.title)
                 }
-                .font(.system(size: 72))
-                .padding(.top)
+                .padding(.vertical)
+                
+                Text("Reccommended packing list")
+                    .fontWeight(.semibold)
+                    .padding()
                 
                 List(Array(items.enumerated()), id: \.offset) { item in
                     let itemName = item.element.key
@@ -61,7 +66,7 @@ struct PackView: View {
     struct UncheckedBox: View {
         var body: some View {
             VStack {
-                RoundedRectangle(cornerRadius: 4)
+                Circle()
                     .fill(Color.white)
                     .stroke(.tertiary, style: .init())
             }
@@ -74,13 +79,8 @@ struct PackView: View {
         var body: some View {
             VStack {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color.blue)
-                    Image(systemName: "checkmark")
-                        .foregroundStyle(Color.white)
-                        .imageScale(.small)
-                        .bold()
-                        .font(.system(size: 16))
+                    Circle()
+                        .fill(Color.orange)
                 }
             }
             .frame(width: 20, height: 20)

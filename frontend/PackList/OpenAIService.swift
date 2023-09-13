@@ -8,14 +8,24 @@
 import Foundation
 
 class OpenAIService {
-    private let apiKey: String
-    private let apiUrl = "https://api.openai.com/v1/chat/completions" // You may need to adjust the API URL based on OpenAI's current endpoint.
-
-    init(apiKey: String) {
-        self.apiKey = apiKey
+    private var apiKey = ""
+    private var apiUrl = "https://api.openai.com/v1/chat/completions" // You may need to adjust the API URL based on OpenAI's current endpoint.
+    
+    func setKey(key: String) {
+        self.apiKey = key
+    }
+    
+    func setURL(url: String) {
+        self.apiUrl = url
     }
     
     func query(prompt: String) -> String {
+        
+        if self.apiKey == "" {
+            print("Failed to query OpenAI, missing API Key")
+            return "Error: Set apiKey"
+        }
+        
         var response : String = ""
         
         sendRequest(prompt: prompt) { result in
