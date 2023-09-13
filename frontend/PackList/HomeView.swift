@@ -40,15 +40,10 @@ struct HomeView: View {
     
     @State private var text : String = ""
     @State private var previewText: String = samplePreviewText.randomElement()!
-    @State private var isShowingDetailView: Bool = false
+    @State private var isShowingBufferView: Bool = false
     @State private var isShowingChat: Bool = false
-    
-    private let apiHandler = APIHandler()
-    private let openAIService = OpenAIService()
-    
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 60*60*24)
-    
     
     var body: some View {
         NavigationStack {
@@ -74,7 +69,7 @@ struct HomeView: View {
             .background(.white)
             .toolbar {
                 if isShowingChat {
-                    Button("Edit Dates") {
+                    Button("Edit") {
                         withAnimation {
                             isShowingChat.toggle()
                         }
@@ -145,7 +140,7 @@ struct HomeView: View {
     }
     
     var prompt1: some View {
-        Text("When are you travelling?")
+        Text("When is your trip?")
             .font(.title2)
             .minimumScaleFactor(0.6)
             .lineLimit(2)
@@ -175,9 +170,7 @@ struct HomeView: View {
                     
                     Button {
                         Task {
-                            text = ""
-                            //                            await submitQuery(input: text)
-                            isShowingDetailView = true
+                            isShowingBufferView = true
                         }
                     } label: {
                         Image(systemName: "arrow.up")
@@ -187,10 +180,10 @@ struct HomeView: View {
                     .background(text == "" ? Color(uiColor: .systemGray) : Color(hex:"#FE6B72"))
                     .foregroundStyle(.white)
                     .clipShape(Circle())
-                    .navigationDestination(isPresented: $isShowingDetailView, destination: {
-                        PackView(items: clothingItems)
-                    })
                     .disabled(text == "")
+                    .navigationDestination(isPresented: $isShowingBufferView, destination: {
+                        BufferView(input: text, isShowingChat: $isShowingChat)
+                    })
                 }
             }
             .padding()
@@ -198,14 +191,7 @@ struct HomeView: View {
 
     }
     
-    private func submitQuery(input: String) async -> Void {
-        // Set key before submitting query - fix later
-        openAIService.setKey(key: apiHandler.openAIKey)
-        
-        let query = "Extract the activity, location, and month from the following text and return it format as json in response. Text: \(input)"
-        let response = openAIService.query(prompt: "\(query)")
-        print(response)
-    }
+    
 }
 
 #Preview("HomeView") {

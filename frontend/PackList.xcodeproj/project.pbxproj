@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A0101F362AB23D430082E7AF /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0101F352AB23D430082E7AF /* Color+Ext.swift */; };
+		A0101F382AB26A640082E7AF /* BufferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0101F372AB26A640082E7AF /* BufferView.swift */; };
 		A043EA2D2AB2360300E6388C /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043EA2C2AB2360300E6388C /* APIHandler.swift */; };
 		A054EB6D2AAFB5F900ED97BE /* PackListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054EB6C2AAFB5F900ED97BE /* PackListApp.swift */; };
 		A054EB6F2AAFB5F900ED97BE /* PackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054EB6E2AAFB5F900ED97BE /* PackView.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		A0101F352AB23D430082E7AF /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
+		A0101F372AB26A640082E7AF /* BufferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferView.swift; sourceTree = "<group>"; };
 		A043EA2C2AB2360300E6388C /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
 		A054EB692AAFB5F900ED97BE /* PackList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PackList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A054EB6C2AAFB5F900ED97BE /* PackListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackListApp.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				A054EB6C2AAFB5F900ED97BE /* PackListApp.swift */,
 				A054EB7A2AAFC7ED00ED97BE /* HomeView.swift */,
 				A054EB6E2AAFB5F900ED97BE /* PackView.swift */,
+				A0101F372AB26A640082E7AF /* BufferView.swift */,
 				A075E3CD2AAFECE400EAF657 /* OpenAIService.swift */,
 				A043EA2C2AB2360300E6388C /* APIHandler.swift */,
 				A075E3D02AAFF2E000EAF657 /* MapsDemo.swift */,
@@ -154,6 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0101F382AB26A640082E7AF /* BufferView.swift in Sources */,
 				A054EB7B2AAFC7ED00ED97BE /* HomeView.swift in Sources */,
 				A0101F362AB23D430082E7AF /* Color+Ext.swift in Sources */,
 				A054EB6F2AAFB5F900ED97BE /* PackView.swift in Sources */,

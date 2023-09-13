@@ -9,48 +9,45 @@ import SwiftUI
 
 struct PackView: View {
     
-    let items : [String:Int]?
+    let items : [String:Int]
     
     @State private var selectedItems: Dictionary<String, Bool> = [:]
     
     var body: some View {
-        if let items = items {
-            VStack {
-                VStack(spacing: 24) {
-                    Image(systemName: "suitcase.rolling.fill")
-                        .font(.system(size: 96))
-                    Text(getSuitcaseWeight().formatted())
-                        .font(.title)
-                }
-                .padding(.vertical)
+        VStack {
+            VStack(spacing: 24) {
+                Image(systemName: "suitcase.rolling.fill")
+                    .font(.system(size: 96))
+                Text(getSuitcaseWeight().formatted())
+                    .font(.title)
+            }
+            .padding(.vertical)
+            
+            Text("Reccommended packing list")
+                .fontWeight(.semibold)
+                .padding()
+            
+            List(Array(items.enumerated()), id: \.offset) { item in
+                let itemName = item.element.key
+                let itemWeight = Measurement<UnitMass>(value: Double(item.element.value), unit: .grams)
                 
-                Text("Reccommended packing list")
-                    .fontWeight(.semibold)
-                    .padding()
-                
-                List(Array(items.enumerated()), id: \.offset) { item in
-                    let itemName = item.element.key
-                    let itemWeight = Measurement<UnitMass>(value: Double(item.element.value), unit: .grams)
-                    
-                    ClothingItem(itemName: itemName, itemWeight: itemWeight.formatted(), selectedItems: $selectedItems)
-                }
-                .listStyle(.plain)
-                .scrollIndicators(.hidden)
+                ClothingItem(itemName: itemName, itemWeight: itemWeight.formatted(), selectedItems: $selectedItems)
             }
-            .navigationTitle("Some Name")
-            .toolbar {
-                ToolbarItem {
-                    Button{} label: { Image(systemName: "square.and.arrow.up") }
-                }
+            .listStyle(.plain)
+            .scrollIndicators(.hidden)
+        }
+        .navigationTitle("Some Name")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem {
+                Button{} label: { Image(systemName: "square.and.arrow.up") }
             }
-            .padding(.horizontal)
-            .onAppear {
-                for clothingItem in items.keys {
-                    selectedItems[clothingItem] = false
-                }
+        }
+        .padding(.horizontal)
+        .onAppear {
+            for clothingItem in items.keys {
+                selectedItems[clothingItem] = false
             }
-        } else {
-            ProgressView()
         }
     }
     

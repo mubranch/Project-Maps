@@ -5,62 +5,60 @@
 //  Created by Mustafa on 9/11/23.
 //
 
+//
+//  OpenAIService.swift
+//  PackList
+//
+//  Created by Mustafa on 9/11/23.
+//
+
 import Foundation
 
 class OpenAIService {
-    private var apiKey = ""
+    
+    private let apiHandler = APIHandler()
     private var apiUrl = "https://api.openai.com/v1/chat/completions" // You may need to adjust the API URL based on OpenAI's current endpoint.
     
-    func setKey(key: String) {
-        self.apiKey = key
+    var apiKey: String {
+        apiHandler.openAIKey
     }
-    
+
     func setURL(url: String) {
         self.apiUrl = url
     }
-    
-    func query(prompt: String) -> String {
-        
+
+    func query(prompt: String) async throws -> [String: Any]? {
         if self.apiKey == "" {
-            print("Failed to query OpenAI, missing API Key")
-            return "Error: Set apiKey"
+            throw NSError(domain: "OpenAI API Key is missing", code: 0, userInfo: nil)
         }
-        
-        var response : String = ""
-        
-        sendRequest(prompt: prompt) { result in
-            switch result {
-            case .success(let responseData):
-                // Convert the response data to a string
-                if let responseString = String(data: responseData, encoding: .utf8) {
-                    print("Response from OpenAI: \(responseString)")
-                    response = responseString
-                    
-                    // Use the responseString
-                } else {
-                    print("Failed to convert response data to string.")
-                }
-            case .failure(let error):
-                response = "Error: \(error)"
-            }
+
+        let responseData = try await sendRequest(prompt: prompt)
+
+        if let message = parseResponse(responseData) {
+            print(message)
+            return message
+        } else {
+            throw NSError(domain: "Failed to extract message from response.", code: 0, userInfo: nil)
         }
-        return response
     }
 
-    private func sendRequest(prompt: String, completion: @escaping (Result<Data, Error>) -> Void) {
+    private func sendRequest(prompt: String) async throws -> Data {
         guard let apiUrl = URL(string: apiUrl) else {
-            completion(.failure(NSError(domain: "Invalid API URL", code: 0, userInfo: nil)))
-            return
+            throw NSError(domain: "Invalid API URL", code: 0, userInfo: nil)
         }
 
         var request = URLRequest(url: apiUrl)
         request.httpMethod = "POST"
-        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Set the Authorization header with your API key
+        let apiKeyHeader = "Bearer \(apiKey)"
+        request.setValue(apiKeyHeader, forHTTPHeaderField: "Authorization")
+        
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let requestData: [String: Any] = [
             "model": "gpt-3.5-turbo",
-            "messages": [["role":"user", "content":"\(prompt)"]],
+            "messages": [["role": "user", "content": "\(prompt)"]],
             "temperature": 0.7,
             "max_tokens": 500 // You can adjust as needed
         ]
@@ -69,24 +67,21 @@ class OpenAIService {
             let jsonRequestData = try JSONSerialization.data(withJSONObject: requestData, options: [])
             request.httpBody = jsonRequestData
         } catch {
-            completion(.failure(error))
-            return
+            throw error
         }
 
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
+        let (data, _) = try await URLSession.shared.data(from: request)
 
-            guard let data = data else {
-                completion(.failure(NSError(domain: "No data received", code: 0, userInfo: nil)))
-                return
-            }
+        return data
+    }
 
-            completion(.success(data))
+    private func parseResponse(_ responseData: Data) -> [String: Any]? {
+        // Parse the JSON response data
+        if let jsonObject = try? JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any] {
+            print(jsonObject)
+           return jsonObject
+        } else {
+            return nil
         }
-
-        task.resume()
     }
 }

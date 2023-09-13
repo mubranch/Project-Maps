@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "EDBB4A89-B818-4816-ACD0-7A4CE8AFCB03"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "61D99016-FDD2-4453-A65E-BC9873DCF20E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PackList/OpenAIService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "query(prompt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "61D99016-FDD2-4453-A65E-BC9873DCF20E - 493deb6abf82983f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for PackList.OpenAIService.query(prompt: Swift.String) async throws -&gt; Swift.String"
+                  moduleName = "PackList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mubranch/Developer/ProjectMap/frontend/PackList/OpenAIService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "248">
+               </Location>
+               <Location
+                  uuid = "61D99016-FDD2-4453-A65E-BC9873DCF20E - 493deb6abf82983f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for PackList.OpenAIService.query(prompt: Swift.String) async throws -&gt; Swift.String"
+                  moduleName = "PackList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mubranch/Developer/ProjectMap/frontend/PackList/OpenAIService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "132">
+               </Location>
+               <Location
+                  uuid = "61D99016-FDD2-4453-A65E-BC9873DCF20E - b64a430c639d82c5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for PackList.OpenAIService.query(prompt: Swift.String) async throws -&gt; Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Swift.String&gt;&gt;"
+                  moduleName = "PackList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mubranch/Developer/ProjectMap/frontend/PackList/OpenAIService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "132">
+               </Location>
+               <Location
+                  uuid = "61D99016-FDD2-4453-A65E-BC9873DCF20E - 25cdddef22fc591c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for PackList.OpenAIService.query(prompt: Swift.String) async throws -&gt; Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;"
+                  moduleName = "PackList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mubranch/Developer/ProjectMap/frontend/PackList/OpenAIService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "132">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
